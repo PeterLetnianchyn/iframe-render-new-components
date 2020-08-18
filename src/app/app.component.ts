@@ -11,13 +11,13 @@ export class AppComponent {
 
   @ViewChild('iframe', {static: false}) iframe: ElementRef;
 
-  firstInput = new FormControl('5');
+  inputValue = new FormControl('5');
   doc;
   compRef: ComponentRef<InnerComponentComponent>;
 
   constructor(private vcRef: ViewContainerRef, private resolver: ComponentFactoryResolver) { }
 
-  onLoad(iframe){
+  onLoad(iframe) {
     this.doc = iframe.contentDocument || iframe.contentWindow;
     this.createComponent();
   }
@@ -27,10 +27,10 @@ export class AppComponent {
     this.compRef = this.vcRef.createComponent(compFactory);
     this.compRef.location.nativeElement.id = 'innerComp';
 
-    (<InnerComponentComponent>this.compRef.instance).firstInput = this.firstInput.value;
+    ( this.compRef.instance as InnerComponentComponent).firstInput = this.inputValue;
 
-    (<InnerComponentComponent>this.compRef.instance).emitOutput.subscribe(response => {
-      console.log("Respose ",response);
+    ( this.compRef.instance as InnerComponentComponent).emitOutput.subscribe(response => {
+      this.inputValue.setValue(response.inputData);
     });
 
     this.doc.body.appendChild(this.compRef.location.nativeElement);

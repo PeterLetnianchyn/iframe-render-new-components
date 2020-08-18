@@ -1,2 +1,3 @@
-<p>inner-component data: {{firstInput}}</p>
-<button type="button" (click)="click()">Emit</button>
+<p>inner-component data: {{firstInput.value}}</p>
+<input [formControl]="newValue">
+<button type="button" (click)="emmit()">Emit</button>

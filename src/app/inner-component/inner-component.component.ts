@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-inner-component',
@@ -7,17 +8,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class InnerComponentComponent implements OnInit {
 
-  @Input() firstInput;
+  @Input() firstInput: FormControl;
 
-  @Output() emitOutput: EventEmitter<any> = new EventEmitter();;
-
+  @Output() emitOutput: EventEmitter<any> = new EventEmitter();
+  newValue = new FormControl('');
   constructor() { }
 
   ngOnInit() {
+    this.newValue.setValue(this.firstInput.value);
   }
 
-  click(){
-    this.emitOutput.emit({inputData: this.firstInput});
+  emmit() {
+    this.emitOutput.emit({inputData: this.newValue.value});
   }
 
 }
