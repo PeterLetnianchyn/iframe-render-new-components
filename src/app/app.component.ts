@@ -11,7 +11,7 @@ export class AppComponent {
 
   @ViewChild('iframe', {static: false}) iframe: ElementRef;
 
-  inputValue = new FormControl('5');
+  inputValue = new FormControl('Hi there');
   doc;
   compRef: ComponentRef<InnerComponentComponent>;
 
